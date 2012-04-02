@@ -43,7 +43,8 @@ password_change = login_required(password_change)
 
 # XXX: this function uses a decorator, which calls functools.wraps, which compiles the code
 # thus we cannot inspect the source
-def login(request, template_name='registration/login.html', redirect_field_name=REDIRECT_FIELD_NAME):
+def login(request, template_name='registration/login.html', redirect_field_name=REDIRECT_FIELD_NAME,
+          username_label=None):
     "Displays the login form and handles the login action."
     redirect_to = request.REQUEST.get(redirect_field_name, '')
     if request.method == "POST":
@@ -64,6 +65,8 @@ def login(request, template_name='registration/login.html', redirect_field_name=
         current_site = Site.objects.get_current()
     else:
         current_site = RequestSite(request)
+    if username_label:
+        form.fields['username'].label = username_label
     return render_to_response(template_name, {
         'form': form,
         redirect_field_name: redirect_to,
