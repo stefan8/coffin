@@ -10,6 +10,17 @@ __all__ = ('page_not_found', 'server_error', 'shortcut')
 from django.views.defaults import shortcut
 
 
+def permission_denied(request, template_name='403.html'):
+    """
+    Default 403 handler.
+
+    Templates: `403.html`
+    Context: None
+    """
+    content = render_to_string(template_name, Context({}))
+    return http.HttpResponseNotFound(content)
+
+
 def page_not_found(request, template_name='404.html'):
     """
     Default 404 handler.
