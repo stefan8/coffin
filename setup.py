@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='Coffin',
       version=".".join(map(str, __import__("coffin").__version__)),
@@ -9,7 +9,7 @@ setup(name='Coffin',
       maintainer='David Cramer',
       maintainer_email='dcramer@gmail.com',
       url='http://github.com/coffin/coffin',
-      packages=('coffin',),
+      packages=find_packages(exclude=["tests"]),
       #install_requires=['Jinja2', 'django>=1.2'],
       classifiers=[
           "Framework :: Django",
